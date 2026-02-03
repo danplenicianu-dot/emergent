@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Rentz Multiplayer (MVP)</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Supabase JS (UMD) via CDN: no build, no terminal -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">R</div>
+        <div>
+          <div class="title">Rentz Multiplayer</div>
+          <div class="subtitle">MVP • 4 jucători • fără login</div>
+        </div>
+      </div>
+      <div class="right">
+        <button id="btnReset" class="ghost" title="Resetează player_id local">Reset ID</button>
+      </div>
+    </header>
+
+    <main class="grid">
+      <section class="card">
+        <h2>1) Config</h2>
+        <p class="muted">Completează <code>config.js</code> cu <b>Project URL</b> și <b>Publishable key</b> din Supabase.</p>
+        <div class="row">
+          <div class="pill">player_id: <span id="playerId"></span></div>
+          <div class="pill">nume: <span id="playerName"></span></div>
+        </div>
+        <div class="row">
+          <input id="inpName" placeholder="Numele tău (ex: Dan)" />
+          <button id="btnSaveName">Salvează</button>
+        </div>
+        <div class="hr"></div>
+        <p class="muted small">Dacă vezi erori în jos, înseamnă că lipsesc tabelele / politicile din DB sau nu ai pus corect URL/key.</p>
+      </section>
+
+      <section class="card">
+        <h2>2) Cameră</h2>
+        <div class="row">
+          <button id="btnCreate">Creează cameră</button>
+          <input id="inpCode" placeholder="Cod (6 caractere)" maxlength="6" />
+          <button id="btnJoin" class="secondary">Intră</button>
+        </div>
+        <div class="hr"></div>
+        <div class="row wrap">
+          <div class="pill">room: <span id="roomCode">—</span></div>
+          <div class="pill">status: <span id="roomStatus">—</span></div>
+          <div class="pill">seat: <span id="mySeat">—</span></div>
+        </div>
+        <div class="row">
+          <button id="btnReady" class="secondary" disabled>Sunt pregătit</button>
+          <button id="btnStart" disabled>Start (host)</button>
+        </div>
+        <div class="hr"></div>
+        <div>
+          <h3>Jucători (4 locuri)</h3>
+          <div id="players" class="players"></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>3) Evenimente (Realtime)</h2>
+        <div id="events" class="events"></div>
+      </section>
+
+      <section class="card">
+        <h2>4) Debug</h2>
+        <div id="debug" class="debug"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="muted small">
+        MVP-ul ăsta e făcut să ruleze <b>static</b> (GitHub Pages / Netlify / orice hosting). Nu necesită terminal.
+      </div>
+    </footer>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
